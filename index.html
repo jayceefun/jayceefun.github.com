@@ -9,8 +9,7 @@
   <meta name="author" content="Jaycee Fun">
 
   
-  <meta name="description" content="测试第二篇, it&rsquo;s cool :)
-">
+  <meta name="description" content="这是一个非常容易混搅的经典问题, 关于js中的参数传递, 到底是按值还是按引用呢? 最近在工作中确实的遇到了这样的问题, 所以就写篇blog拿出来818好了, 当做复习了. 关于这个问题, 初学者很容易踏入这样一个误区, 那就是引用类型是按引用传递, 普通类型按值传递: 注意: 这是不正确的, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -66,6 +65,85 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/27/firstone/">Javascript中的参数传递问题</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-27T14:03:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/27/firstone/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>这是一个非常容易混搅的经典问题, 关于js中的参数传递, 到底是按值还是按引用呢? 最近在工作中确实的遇到了这样的问题, 所以就写篇blog拿出来818好了, 当做复习了.</p>
+
+<p>关于这个问题, 初学者很容易踏入这样一个误区, 那就是引用类型是按引用传递, 普通类型按值传递:</p>
+
+<h4>注意: 这是不正确的, 根据javascript高级程序第三版中的严格定义, 可以知道: javascript中的所有参数传递都是按值传递的.</h4>
+
+<p>的确, 从行为上来看, 好像真的是这样, 下面来看看书中的例子:</p></blockquote>
+
+<pre><code>    function addTen(num) {
+        num += 10;
+        return num;
+    }
+
+    var count = 20;
+    var result = addTen(count);
+    console.log(count);    //20, 木有变化
+    console.log(result);    //30, 它变态了:P
+
+    上面这个程序很好理解, 普通类型嘛, 我们再来看看普遍认为的按引用传递的情况:
+
+    function setName(obj) {
+        obj.name = "jaycee";
+    }
+
+    var person = new Object();
+    setName(person);
+    console.log(person.name);     //"jaycee", 也没什么不对的;
+
+    下面是重点了, 理解下面这个段代码是很重要的, 它说明了js中参数传递的本质是按值的:
+
+    function setName(obj) {
+        obj.name = "jaycee";
+        obj = new Object();
+        obj.name = "hippo";
+    }
+
+    var person = new Object();
+    setName(person);
+    console.log(person.name);    //"jaycee", 出现了一些疑惑, 也是最需要好好思考的地方
+</code></pre>
+
+<blockquote><p>从上面的最后那段代码我们可以看到, 在setName()方法中, 我们在对传入的obj赋值后, new了一个新的对象, 并赋给了obj, 如果person是按引用传递的, 那么person就回自动被修改为指向其name属性值为hippo的新对象. 但是当我们访问person.name时, 却任然得到了name属性值为jaycee的结果, 说明即使在函数内部修改了参数的值, 但原始的引用仍保持不变. 当函数在内部重写obj时, 这个变量引用的就是一个局部的对象了. 而这个对象会在函数执行完毕后立即被销毁.</p></blockquote>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -158,6 +236,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/27/firstone/">Javascript中的参数传递问题</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/08/27/test2/">测试2</a>
