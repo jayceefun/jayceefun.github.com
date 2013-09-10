@@ -4,7 +4,7 @@
   <title><![CDATA[Jaycee's Blog]]></title>
   <link href="http://jayceefun.github.io/atom.xml" rel="self"/>
   <link href="http://jayceefun.github.io/"/>
-  <updated>2013-09-10T12:36:31+08:00</updated>
+  <updated>2013-09-10T19:19:57+08:00</updated>
   <id>http://jayceefun.github.io/</id>
   <author>
     <name><![CDATA[Jaycee Fun]]></name>
@@ -89,6 +89,12 @@
 </code></pre>
 
 <p>经测试, 两个函数分别生成了各自的数据库和集合, 实现了业务需要, 即使用指定数据库中的模型, 唯一要注意的是在使用不同的数据库的模型时, 要知道自己在用哪个连接, 连接对象的名字要起得清晰.</p></blockquote>
+
+<p>最后补充一个最近总要用到的array类型字段的筛选方法: elemMatch方法, 这个方法mongoose官方文档写的很省略.. 基本上没明白是干嘛用的, 无奈我去看了mongodb的对应方法, 才知道原来是筛选符合条件的array字段的doc用的, 大概的用法如下</p>
+
+<blockquote><pre><code>   Model.where('friends').elemMatch({sb: '2b'}).execFind(callback);
+   // 上面的查询语句可以筛选出friends这个数组字段中拥有{2b: '2b'}这个元素的所有的doc. 
+</code></pre></blockquote>
 ]]></content>
   </entry>
   
