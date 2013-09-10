@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>javascript中的参数传递问题 - Jaycee's Blog</title>
+  <title>Category: mongoose - Jaycee's Blog</title>
   <meta name="author" content="Jaycee Fun">
 
   
-  <meta name="description" content="这是一个非常容易混搅的经典问题, 关于js中的参数传递, 到底是按值还是按引用呢? 最近在工作中确实的遇到了这样的问题, 所以就写篇blog拿出来818好了, 当做复习了. 关于这个问题, 初学者很容易踏入这样一个误区, 那就是引用类型是按引用传递, 普通类型按值传递: 注意: 这是不正确的, &hellip;">
+  <meta name="description" content="Category: mongoose">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://jayceefun.github.io/blog/2013/08/27/firstone">
+  <link rel="canonical" href="http://jayceefun.github.ioblog/categories/mongoose">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Jaycee's Blog" type="application/atom+xml">
@@ -65,134 +65,36 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">Javascript中的参数传递问题</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-27T14:03:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2013</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Category: Mongoose</h1>
     
   </header>
-
-
-<div class="entry-content"><blockquote><p>这是一个非常容易混搅的经典问题, 关于js中的参数传递, 到底是按值还是按引用呢? 最近在工作中确实的遇到了这样的问题, 所以就写篇blog拿出来818好了, 当做复习了.</p>
-
-<p>关于这个问题, 初学者很容易踏入这样一个误区, 那就是引用类型是按引用传递, 普通类型按值传递:</p>
-
-<h4>注意: 这是不正确的, 根据javascript高级程序第三版中的严格定义, 可以知道: javascript中的所有参数传递都是按值传递的.</h4>
-
-<p>的确, 从行为上来看, 好像真的是这样, 下面来看看书中的例子:</p></blockquote>
-
-<pre><code>    function addTen(num) {
-        num += 10;
-        return num;
-    }
-
-    var count = 20;
-    var result = addTen(count);
-    console.log(count);    //20, 木有变化
-    console.log(result);    //30, 它变态了:P
-
-    上面这个程序很好理解, 普通类型嘛, 我们再来看看普遍认为的按引用传递的情况:
-
-    function setName(obj) {
-        obj.name = "jaycee";
-    }
-
-    var person = new Object();
-    setName(person);
-    console.log(person.name);     //"jaycee", 也没什么不对的;
-
-    下面是重点了, 理解下面这个段代码是很重要的, 它说明了js中参数传递的本质是按值的:
-
-    function setName(obj) {
-        obj.name = "jaycee";
-        obj = new Object();
-        obj.name = "hippo";
-    }
-
-    var person = new Object();
-    setName(person);
-    console.log(person.name);    //"jaycee", 出现了一些疑惑, 也是最需要好好思考的地方
-</code></pre>
-
-<blockquote><p>从上面的最后那段代码我们可以看到, 在setName()方法中, 我们在对传入的obj赋值后, new了一个新的对象, 并赋给了obj, 如果person是按引用传递的, 那么person就回自动被修改为指向其name属性值为hippo的新对象. 但是当我们访问person.name时, 却任然得到了name属性值为jaycee的结果, 说明即使在函数内部修改了参数的值, 但原始的引用仍保持不变. 当函数在内部重写obj时, 这个变量引用的就是一个局部的对象了. 而这个对象会在函数执行完毕后立即被销毁.</p></blockquote>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Jaycee Fun</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2013</h2>
+
+<article>
+  
+<h1><a href="/blog/2013/08/27/mongoose_multi_dbs/">Mongoose 同时建立多个数据库连接</a></h1>
+<time datetime="2013-08-27T14:03:00+08:00" pubdate><span class='month'>Aug</span> <span class='day'>27</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/mongoose/'>mongoose</a></span>
+</footer>
 
 
-<time datetime="2013-08-27T14:03:00+08:00" pubdate data-updated="true">Aug 27<span>th</span>, 2013</time>
-      
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://jayceefun.github.io/blog/2013/08/27/firstone/" data-via="jayceefun" data-counturl="http://jayceefun.github.io/blog/2013/08/27/firstone/" >Tweet</a>
-  
-  
-  
-  
-  <div class="bshare-custom icon-medium"><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog"></a><a title="分享到人人网" class="bshare-renren"></a><a title="分享到腾讯微博" class="bshare-qqmb"></a><a title="分享到网易微博" class="bshare-neteasemb"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/button.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script><a class="bshareDiv" onclick="javascript:return false;"></a><script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
-
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/08/27/test2/" title="Previous Post: 测试2">&laquo; 测试2</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/08/27/mongoose_multi_dbs/" title="Next Post: Mongoose 同时建立多个数据库连接">Mongoose 同时建立多个数据库连接 &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
-  </section>
+
+  
+</article>
 
 </div>
 
@@ -309,10 +211,7 @@
       var disqus_shortname = 'jayceefun';
       
         
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://jayceefun.github.io/blog/2013/08/27/firstone/';
-        var disqus_url = 'http://jayceefun.github.io/blog/2013/08/27/firstone/';
-        var disqus_script = 'embed.js';
+        var disqus_script = 'count.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

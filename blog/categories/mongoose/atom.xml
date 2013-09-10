@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mongoose | Jaycee's Blog]]></title>
+  <link href="http://jayceefun.github.io/blog/categories/mongoose/atom.xml" rel="self"/>
+  <link href="http://jayceefun.github.io/"/>
+  <updated>2013-09-10T12:36:31+08:00</updated>
+  <id>http://jayceefun.github.io/</id>
+  <author>
+    <name><![CDATA[Jaycee Fun]]></name>
+    <email><![CDATA[fanjinchen@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mongoose 同时建立多个数据库连接]]></title>
+    <link href="http://jayceefun.github.io/blog/2013/08/27/mongoose_multi_dbs/"/>
+    <updated>2013-08-27T14:03:00+08:00</updated>
+    <id>http://jayceefun.github.io/blog/2013/08/27/mongoose_multi_dbs</id>
+    <content type="html"><![CDATA[<p>此篇用于备忘, 最近要拆分数据库, 但是保留用户部分共享, 因此会用到一个项目的代码连接多个数据库的情况, 以前用的是</p>
+
+<blockquote><pre><code>   mongoose.connect()
+</code></pre></blockquote>
+
+<p>用这个建立的数据库连接, 只能连接一个数据库, 要想同时连接多个, 需要用下面这个:</p>
+
+<blockquote><pre><code>   mongoose.createConnection()
+</code></pre></blockquote>
+
+<p>就现在项目的逻辑来说, demo大致如下:</p>
+
+<blockquote><pre><code>   //首先创建两个数据库连接
+   var mongoose = require('mongoose');
+   var config = require('config');
+   var conn1 = mongoose.createConnection(config.db1);
+   var conn2 = mongoose.createConnection(config.db2);
+</code></pre></blockquote>
+
+<p>创建模型测试:</p>
+
+<blockquote><pre><code>  //创建两个用户模型
+  var Schema = mongoose.schema;        
+  var UserSchema1 = new Schema({
+      nickname: String,
+      age: Number,
+      email: String,
+  });
+
+  var UserSchema2 = new Schema({
+      nickname: String,
+      age: Number,
+      email: String,
+  });
+
+  //再来, 我们创建两个不同连接的module,
+  var User1 = conn1.model('User', UserSchema1);
+  var User2 = conn2.model('User', UserSchema2);
+
+  //接下来, 写两个测试函数看看结果: 
+  function save1() {
+      new User1({
+          nickname: 'one',
+          age: 8,
+          email: 'qiaoker@hello.com',
+      }).save(function (err, user) {
+          if (err) {
+              console.error(err.toString());
+          } else {
+              console.log('===== user1 ========');
+              console.log(user);
+          }
+      });
+  }
+  function save2() {
+      new User2({
+          nickname: 'two',
+          age: 3,
+
+      }).save(function (err, user) {
+          if (err) {
+              console.error(err.toString());
+          } else {
+              console.log('===== user2 ========');
+              console.log(user);
+          }
+      });
+  }
+</code></pre>
+
+<p>经测试, 两个函数分别生成了各自的数据库和集合, 实现了业务需要, 即使用指定数据库中的模型, 唯一要注意的是在使用不同的数据库的模型时, 要知道自己在用哪个连接, 连接对象的名字要起得清晰.</p></blockquote>
+]]></content>
+  </entry>
+  
+</feed>
