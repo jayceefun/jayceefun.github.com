@@ -4,7 +4,7 @@
   <title><![CDATA[Jaycee's Blog]]></title>
   <link href="http://jayceefun.github.io/atom.xml" rel="self"/>
   <link href="http://jayceefun.github.io/"/>
-  <updated>2013-09-22T11:59:16+08:00</updated>
+  <updated>2013-09-28T13:50:11+08:00</updated>
   <id>http://jayceefun.github.io/</id>
   <author>
     <name><![CDATA[Jaycee Fun]]></name>
@@ -145,28 +145,6 @@
 </code></pre>
 
 <blockquote><p>从上面的最后那段代码我们可以看到, 在setName()方法中, 我们在对传入的obj赋值后, new了一个新的对象, 并赋给了obj, 如果person是按引用传递的, 那么person就回自动被修改为指向其name属性值为hippo的新对象. 但是当我们访问person.name时, 却任然得到了name属性值为jaycee的结果, 说明即使在函数内部修改了参数的值, 但原始的引用仍保持不变. 当函数在内部重写obj时, 这个变量引用的就是一个局部的对象了. 而这个对象会在函数执行完毕后立即被销毁.</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[测试2]]></title>
-    <link href="http://jayceefun.github.io/blog/2013/08/27/test2/"/>
-    <updated>2013-08-27T11:02:00+08:00</updated>
-    <id>http://jayceefun.github.io/blog/2013/08/27/test2</id>
-    <content type="html"><![CDATA[<blockquote><p>测试第二篇, it&rsquo;s cool :)</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[测试1]]></title>
-    <link href="http://jayceefun.github.io/blog/2013/08/27/test1/"/>
-    <updated>2013-08-27T10:45:00+08:00</updated>
-    <id>http://jayceefun.github.io/blog/2013/08/27/test1</id>
-    <content type="html"><![CDATA[<blockquote><p>测试第一篇 :P</p>
-
-<pre><code>   # 来段代码试试
-   puts 'hello, world.'
-</code></pre></blockquote>
 ]]></content>
   </entry>
   
